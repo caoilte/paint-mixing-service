@@ -36,3 +36,17 @@ I will document my solution in this file as I go.
     - Write end-to-end test for recording and then retrieving history [1h]
     - Incorporate storage mechanism into existing stack so that it can easily be run with new and legacy stack [30m]
     - Document solution and collate instructions for running it [30m]
+
+## Running Legacy App Locally
+
+After playing around with Jython its pretty obvious that Docker is the way to go. To make a local Docker image go to the `legacy_app` directory and run,
+
+`docker build -t legacy-paint .`
+
+to make a local docker image. Then run it with,
+
+`docker run --publish=8080:8080 -it --rm  --name legacy-paint-running legacy-paint`
+
+You can test it in a separate terminal eg,
+
+`curl "http://0.0.0.0:8080/v1/?input=%7B%22colors%22%3A5%2C%22customers%22%3A3%2C%22demands%22%3A%5B%5B1%2C1%2C1%5D%2C%5B2%2C1%2C0%2C2%2C0%5D%2C%5B1%2C5%2C0%5D%5D%7D"`
