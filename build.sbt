@@ -17,3 +17,4 @@ lazy val root =
     .aggregate(server, paint)
     .settings(BaseSettings.default())
     .withDependencies
+    .withDocker

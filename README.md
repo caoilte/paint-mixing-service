@@ -50,3 +50,52 @@ to make a local docker image. Then run it with,
 You can test it in a separate terminal eg,
 
 `curl "http://0.0.0.0:8080/v1/?input=%7B%22colors%22%3A5%2C%22customers%22%3A3%2C%22demands%22%3A%5B%5B1%2C1%2C1%5D%2C%5B2%2C1%2C0%2C2%2C0%5D%2C%5B1%2C5%2C0%5D%5D%7D"`
+
+## Testing the New App
+
+You can test the new app if you have `sbt` installed. Because this is how I write tests day-to-day for much larger projects you can run the two different types of tests once in the sbt terminal as follows,
+
+```
+it
+e2e
+```
+
+## Running the New App in SBT
+
+In the sbt terminal you can run the app with,
+
+```
+run
+```
+
+You can then test it from a separate terminal with,
+
+```
+curl --header "Content-Type: application/json"   --request POST   --data @invalid_request.json  http://localhost:9090/v2/optimize
+```
+
+You should get a pretty explanatory error message,
+
+```
+{
+	"errors": [{
+		"errorMessage": "Received customer number '3' but customer numbers must be 0-2'"
+	}, {
+		"errorMessage": "Customer '3' had paint mixes 'sparkly' but paint mixes must be 'matte' or 'glossy'"
+	}]
+}
+```
+
+## Running the New App in Docker
+
+After publishing the application locally as a docker image with the following sbt command
+
+```
+docker:publishLocal
+```
+
+You should be able to run it with
+
+```
+docker run --publish=9090:9090 -it --rm --name paint-mixing-service-running paint-mixing-service:0.1.0-SNAPSHOT
+```

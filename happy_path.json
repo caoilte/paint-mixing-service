@@ -1,0 +1,37 @@
+{
+  "colours" : 5,
+  "customers" : 3,
+  "customerDemands" : [
+    {
+      "customerNumber" : 1,
+      "demands" : [
+        {
+          "colour" : 1,
+          "paintMix" : "matte"
+        }
+      ]
+    },
+    {
+      "customerNumber" : 2,
+      "demands" : [
+        {
+          "colour" : 1,
+          "paintMix" : "glossy"
+        },
+        {
+          "colour" : 2,
+          "paintMix" : "glossy"
+        }
+      ]
+    },
+    {
+      "customerNumber" : 3,
+      "demands" : [
+        {
+          "colour" : 5,
+          "paintMix" : "glossy"
+        }
+      ]
+    }
+  ]
+}

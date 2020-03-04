@@ -1,0 +1,15 @@
+{
+  "colours" : 2,
+  "customers" : 2,
+  "customerDemands" : [
+    {
+      "customerNumber" : 3,
+      "demands" : [
+        {
+          "colour" : 2,
+          "paintMix" : "sparkly"
+        }
+      ]
+    }
+  ]
+}
