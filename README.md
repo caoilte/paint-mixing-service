@@ -149,3 +149,26 @@ Will return a bunch of stuff and
 ```
 
 which is what I implemented for IMPOSSIBLE
+
+## Problems I encountered
+
+I kept a rough list of problems I ran into on this exercise which I've tidied up and which might be interesting,
+
+- I naively thought I'd be able to make a nice quick Scala app that wrapped the Python with Jython. I very quickly discovered that trying to do this would be insane. 
+  - Jython is not a very active project.
+  - Scala wrapper for Jython hasn't been updated in 9 years
+  - Goodness knows how I'd download the dependencies
+- In disbelief I looked around for other options.
+- Finally I remembered Docker. I think I was trying to avoid it and had a brain freeze.
+- App wouldn't run with default Python Docker container because of [this bug](https://github.com/pyeve/eve/issues/1331) so I had to downgrade to Python 3.7.
+- My Docker foo is very rusty. I completely forgot to publish ports!
+- I stole basic sbt structure from a recent work project but it took a little longer to cut down to size than I first anticipated. Might have been better to start up from scratch instead.
+- I also stole Docker testing approach from work, but I'd never looked into the detail of it before so had to spend quite a long time figuring out how it worked before I could get it to start correctly. Still not happy with the setup, but the result is agreeable.
+- Encoding the domain model to the legacy request structure wasn't too bad but I knew I was already running out of time and the code is pretty ugly.
+- Decoding the response was frustrating as I can't remember the last time I had to write a custom text decoder. 8 lines of code that took 30 minutes.
+- I should have done a swagger doc really but I was really running out of time.
+- I deliberately took some time to design a REST api structure that was easy to read even though it made it possible to encode invalid data that the domain model case class hierarchy prevented.
+- This led to a rabbit hole of validation steps that was probably not the best use of my time for such an exercise (but is really nice)
+- Running the app is something I haven't done in a while so was fiddly.
+- Configuring the Scala docker publisher was a nightmare because I made the whole project a multimodule build and that needed a special configuration setting (aggregate false)
+- Docker compose was, however, a dream....
