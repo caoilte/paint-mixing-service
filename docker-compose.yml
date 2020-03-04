@@ -1,0 +1,10 @@
+version: '3'
+services:
+  paint-mixing-service:
+    image: "paint-mixing-service:0.1.0-SNAPSHOT"
+    ports:
+      - "9090:9090"
+  legacy-paint:
+    image: "legacy-paint"
+    ports:
+      - "8080:8080"

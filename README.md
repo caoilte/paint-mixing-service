@@ -94,8 +94,58 @@ After publishing the application locally as a docker image with the following sb
 docker:publishLocal
 ```
 
-You should be able to run it with
+You should be able to run the entire stack with
 
 ```
-docker run --publish=9090:9090 -it --rm --name paint-mixing-service-running paint-mixing-service:0.1.0-SNAPSHOT
+docker-compose up
 ```
+
+Some sample requests responses
+
+### The happy path
+
+```
+curl --header "Content-Type: application/json"   --request POST   --data @happy_path.json  http://localhost:9090/v2/optimize
+```
+
+Will return (not so nicely formatted unless you use jq),
+
+```
+  "paintMixes": [
+    {
+      "colour": 1,
+      "paintType": "Matte"
+    },
+    {
+      "colour": 2,
+      "paintType": "Glossy"
+    },
+    {
+      "colour": 3,
+      "paintType": "Glossy"
+    },
+    {
+      "colour": 4,
+      "paintType": "Glossy"
+    },
+    {
+      "colour": 5,
+      "paintType": "Glossy"
+    }
+  ]
+}
+```
+
+### The unhappy path
+
+```
+curl -v --header "Content-Type: application/json"   --request POST   --data @sad_path.json  http://localhost:9090/v2/optimize
+```
+
+Will return a bunch of stuff and
+
+```
+< HTTP/1.1 404 Not Found
+```
+
+which is what I implemented for IMPOSSIBLE

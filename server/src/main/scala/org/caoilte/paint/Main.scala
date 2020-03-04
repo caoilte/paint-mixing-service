@@ -23,7 +23,7 @@ object Main extends IOApp {
 
     val appStream: Stream[IO, ExitCode] = for {
       client <- AsyncHttpClient.stream[IO](clientConfig)
-      service = new LegacyPaintMixingService[IO](client, Uri.unsafeFromString("http://localhost:8080"))
+      service = new LegacyPaintMixingService[IO](client, Uri.unsafeFromString("http://legacy-paint:8080"))
       paintRestService = PaintRestService(service)
       serverBuild = BlazeServerBuilder[IO].withNio2(true).bindHttp(9090, "0.0.0.0")
       httpApp = PaintApi(paintRestService).orNotFound
